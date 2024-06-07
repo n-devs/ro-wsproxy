@@ -1,8 +1,14 @@
 /**
  * Modules manager
  */
+import { publicIpv4 } from 'public-ip'
+
 var Modules = {}
 
+async function allowUrl() {
+	const ipv4 = await publicIpv4()
+	return [`${ipv4}:6900`,`${ipv4}:5121`,`${ipv4}:6121`]
+}
 
 /**
  * Modules method stack
@@ -18,11 +24,10 @@ Modules.stack = {
  * Register new module
  */
 Modules.load = function registerModule(folder) {
-	var module = require('./modules/' + folder);
 	
 	for(var method in this.stack) {
-		if(typeof module[method] === 'function') {
-			this.stack[method].push( module[method] );
+		if(typeof allowUrl()[method] === 'function') {
+			this.stack[method].push( allowUrl()[method] );
 		}
 	}
 }
@@ -106,4 +111,4 @@ Modules.method.connect = function Connect(ws, callback) {
 /**
  * Exports
  */
-module.exports = Modules;
+export default Modules;

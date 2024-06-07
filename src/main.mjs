@@ -1,12 +1,16 @@
 /**
  * Module
  */
-var Main = module.exports = function Init(config)
+
+import cluster from 'cluster'
+import Server from './server.mjs'
+
+function Init(config)
 {
 	/**
 	 * Dependencies
 	 */
-	var cluster = require('cluster');
+	// var cluster = require('cluster');
 	
 	
 	/**
@@ -24,7 +28,7 @@ var Main = module.exports = function Init(config)
 	/**
 	 * Server constructor
 	 */
-	var Server  = require('./server');
+	// var Server  = require('./server.mjs');
 	
 	var server = new Server(config);
 	
@@ -38,3 +42,5 @@ var Main = module.exports = function Init(config)
 		});
 	}
 }
+
+export default Init

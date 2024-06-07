@@ -1,29 +1,13 @@
 /**
  * Dependencies
  */
-const http = require('http');
-const https = require('https');
-const fs = require('fs');
-const ws = require('ws');
-const modules = require('./modules');
-const mes = require('./message');
-const express = require('express')
-const cors = require('cors')
-
-/**
- * Proxy constructor
-*/
-const Proxy = require('./proxy');
-
-const app = express()
-app.use(cors({
-    origin: '*'
-}))
-
-app.use(function (req, res) {
-	res.writeHead(200);
-	res.end("Secure wsProxy running...\n");
-})
+import http from 'http'
+import https from 'https'
+import fs from 'fs'
+import ws from 'ws'
+import modules from './modules.mjs'
+import mes from './message.mjs'
+import Proxy from './proxy.mjs'
 
 /**
  * Initiate a server
@@ -38,14 +22,20 @@ var Server = function Init(config) {
 		opts.server = https.createServer({
 			key: fs.readFileSync(config.key),
 			cert: fs.readFileSync(config.cert),
-		},app );
+		}, function(req, res) {
+			res.writeHead(200);
+        	res.end("Secure wsProxy running...\n");
+		} );
 
 		opts.server.listen(config.port)
 
 		mes.status("Starting a secure wsProxy on port %s...", config.port)
 	}
 	else {
-		opts.server = http.createServer(app);
+		opts.server = http.createServer(function(req, res) {
+			res.writeHead(200);
+			res.end("wsProxy running...\n");
+		});
 
 		opts.server.listen(config.port)
 
@@ -89,4 +79,4 @@ function onConnection(ws) {
 /**
  * Exports
  */
-module.exports = Server;
+export default Server;

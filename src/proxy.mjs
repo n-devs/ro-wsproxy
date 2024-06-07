@@ -1,8 +1,8 @@
 /**
  * Dependencies
  */
-var net     = require('net');
-var mes     = require('./message');
+import net from 'net'
+import mes from './message.mjs'
 
 /**
  * Constructor
@@ -108,4 +108,4 @@ Proxy.prototype.connectAccept = function OnConnectAccept() {
 /**
  * Exports
  */
-module.exports = Proxy;
+export default Proxy;

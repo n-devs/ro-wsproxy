@@ -1,14 +1,14 @@
 /**
  * Dependencies
  */
-var util = require('util');
+import util from 'util'
 var format = util.format;
 
 
 /**
  * Exports
  */
-var Mes = module.exports = {};
+var Mes = {};
 
 
 /**
@@ -69,3 +69,6 @@ Mes.wrap = function Wrap()
 
 	return args;
 }
+
+
+export default Mes

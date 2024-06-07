@@ -1,10 +1,8 @@
 // Logs
-var mes = require('../../message');
-
+import mes from './../message'
 
 // Allowed IP:HOST to proxy to.
-var allowed_ip = require('../../../allowed');
-
+import allowed_ip from '../../../allowed.mjs'
 
 // This method will check if this websocket can proxy to this server
 // next(boolean) will expect a true or false
@@ -26,6 +24,6 @@ function checkAllowed(info, next) {
 
 
 // Exports methods
-module.exports = {
+export default {
 	verify: checkAllowed //module.verify method
 }

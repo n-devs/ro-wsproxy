@@ -1,0 +1,21 @@
+version: '3' # vs mais atual
+
+services:
+  wsproxy:
+    # image: node:18
+    build: ./
+    container_name: ro-wsproxy
+    restart: always
+    tty: true
+    # command: >
+    #   bash -c wsproxy -a 127.0.0.1:6900,127.0.0.1:6121,127.0.0.1:5121
+    command: >
+      bash -c wsproxy -a serve:6900,serve:6121,serve:5121
+    ports:
+      - "5999:5999"
+    networks:
+      - ro-network
+
+networks:
+  ro-network:
+    driver: bridge

@@ -18,10 +18,12 @@
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "optimist": "0.6.0",
+    "public-ip": "^6.0.2",
     "ws": "^2.3.1"
   },
   "devDependencies": {
-    "mocha": "1.18.x"
+    "mocha": "1.18.x",
+    "wsproxy": "^1.2.32"
   },
   "scripts": {
     "test": "mocha",
